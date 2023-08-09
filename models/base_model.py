@@ -10,12 +10,19 @@ import json
 
 class BaseModel:
     """BaseModel class"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Constructor"""
-        self.id = str(uuid.uuid4())
-        current_time = datetime.datetime.now()
-        self.created_at = current_time
-        self.updated_at = current_time
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            current_time = datetime.datetime.now()
+            self.created_at = current_time
+            self.updated_at = current_time
+        else:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                else:
+                    setattr(self, key, value)
 
     def __str__(self):
         """Magic function
