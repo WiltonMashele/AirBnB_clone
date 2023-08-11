@@ -6,23 +6,31 @@
 import uuid
 import datetime
 import json
+from models import storage
 
 
 class BaseModel:
     """BaseModel class"""
     def __init__(self, *args, **kwargs):
-        """Constructor"""
-        if not kwargs:
+        """Constructor
+        Args:
+            args: list of arguments
+            kwargs: dictionary
+        """
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                if key == "created_at" or key == "updated_at":
+                    str_format = "%Y-%m-%dT%H:%M:%S.%f"
+                    value = datetime.datetime.strptime(value, str_format)
+                setattr(self, key, value)
+        else:
             self.id = str(uuid.uuid4())
             current_time = datetime.datetime.now()
             self.created_at = current_time
             self.updated_at = current_time
-        else:
-            for key, value in kwargs.items():
-                if key == "created_at" or key == "updated_at":
-                    setattr(self, key, datetime.datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
-                else:
-                    setattr(self, key, value)
+            storage.new(self)
 
     def __str__(self):
         """Magic function
@@ -39,6 +47,7 @@ class BaseModel:
         """Updates the public instance attribute updated_at
         with the current time"""
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values
