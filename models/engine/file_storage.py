@@ -38,9 +38,8 @@ class FileStorage:
         not exist.
         """
         from models.base_model import BaseModel
-        file_path = os.path.abspath(FileStorage.__file_path)
-        try:
-            with open(file_path, "r") as f:
+        if os.path.exists(FileStorage.__file_path) is True:
+            with open(FileStorage.__file_path, "r") as f:
                 obj_dict = json.load(f)
                 class_map = {"BaseModel": BaseModel}
                 for key, obj_data in obj_dict.items():
@@ -49,5 +48,3 @@ class FileStorage:
                     if obj_cls is not None:
                         obj = obj_cls(**obj_data)
                         FileStorage.__objects[key] = obj
-        except FileNotFoundError:
-            pass

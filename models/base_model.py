@@ -39,7 +39,7 @@ class BaseModel:
         class_name = "[" + self.__class__.__name__ + "]"
         obj_dict = self.__dict__.copy()
         dct = {k: v for k, v in obj_dict.items() if (not v) is False}
-        return class_name + " (" + self.id + ") + str(dct)"
+        return class_name + " (" + self.id + ") "+ str(dct)
 
     def save(self):
         """Updates the public instance attribute updated_at
