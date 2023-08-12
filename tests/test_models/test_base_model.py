@@ -18,6 +18,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(my_model.id, str)
         self.assertIsInstance(my_model.created_at, datetime.datetime)
         self.assertIsInstance(my_model.updated_at, datetime.datetime)
+        my_model.name = "Sphe"
+        my_model.my_number = 89
+        my_model.save()
+        my_model_json = my_model.to_dict()
+        self.assertEqual(my_model.name, my_model_json['name'])
+        self.assertEqual(my_model.my_number, my_model_json['my_number'])
+        self.assertEqual('BaseModel', my_model_json['__class__'])
+        self.assertEqual(.my_model.id, my_model_json['id'])
+
 
     def test_save(self):
         """Testing updated_at after making
