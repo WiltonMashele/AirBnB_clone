@@ -36,11 +36,12 @@ class BaseModel:
         """Magic function
             return a string to be printed
         """
+        class_name = "[" + self.__class__.__name__ + "]"
         obj_dict = self.__dict__.copy()
-        obj_dict["created_at"] = obj_dict["created_at"].isoformat()
-        obj_dict["updated_at"] = obj_dict["updated_at"].isoformat()
+        obj_dict["created_at"] = str(obj_dict["created_at"])
+        obj_dict["updated_at"] = str(obj_dict["updated_at"])
         class_name = "BaseModel"
-        final_str = f"[{class_name}] ({self.id}) {json.dumps(obj_dict)}"
+        final_str = f"{class_name} ({self.id}) {obj_dict}"
         return final_str
 
     def save(self):
