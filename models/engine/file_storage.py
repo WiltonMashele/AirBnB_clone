@@ -1,6 +1,13 @@
 """file storage module"""
 import json
 import os
+from models.base_model import BaseModel
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.user import User
 
 
 class FileStorage:
@@ -37,13 +44,17 @@ class FileStorage:
         no exception is raised if the file does
         not exist.
         """
-        from models.base_model import BaseModel
-        from models.user import User
-
         if os.path.exists(FileStorage.__file_path) is True:
             with open(FileStorage.__file_path, "r") as f:
                 obj_dict = json.load(f)
-                class_map = {"BaseModel": BaseModel}
+                class_map = {
+                    "BaseModel": BaseModel,
+                    "State": State,
+                    "City": City,
+                    "Amenity": Amenity,
+                    "Place": Place,
+                    "Review": Review
+                    }
                 for key, obj_data in obj_dict.items():
                     class_name, obj_id = key.split(".")
                     obj_cls = class_map.get(class_name)
