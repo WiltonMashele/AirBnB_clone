@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Console program"""
 import sys
 import cmd
 
@@ -9,6 +10,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """Exit the interpreter."""
         return True
+
     def help_help(self):
         """ Prints help command description """
         print("Provides description of a given command")
