@@ -9,6 +9,9 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """Exit the interpreter."""
         return True
+    def help_help(self):
+        """ Prints help command description """
+        print("Provides description of a given command")
 
     def help_quit(self):
         print("Quit command to exit the program")
