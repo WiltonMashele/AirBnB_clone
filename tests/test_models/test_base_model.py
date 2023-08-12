@@ -25,7 +25,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(my_model.name, my_model_json['name'])
         self.assertEqual(my_model.my_number, my_model_json['my_number'])
         self.assertEqual('BaseModel', my_model_json['__class__'])
-        self.assertEqual(.my_model.id, my_model_json['id'])
+        self.assertEqual(my_model.id, my_model_json['id'])
 
 
     def test_save(self):
