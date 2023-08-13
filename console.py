@@ -9,7 +9,7 @@ import shlex
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
-    classes = {"BaseModel": BaseModel}
+    classes = {"BaseModel": BaseModel, "User": User}
     command = ['create', 'show', 'update', 'all', 'destroy', 'count']
 
     def do_quit(self, arg):
