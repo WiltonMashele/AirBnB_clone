@@ -3,6 +3,12 @@
 import sys
 import cmd
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.state import State
+from models.review import Review
 from models import storage
 import shlex
 
@@ -10,7 +16,8 @@ import shlex
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
-               "City": City, "Amenity": Amenity, "State": State, "Review": Review}
+               "City": City, "Amenity": Amenity, "State": State,
+               "Review": Review}
     command = ['create', 'show', 'update', 'all', 'destroy', 'count']
 
     def do_quit(self, arg):
