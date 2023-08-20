@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         else:
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
         """print the string representation of an instance"""
@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         cls_name = args[0]
         if cls_name not in HBNBCommand.classes:
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
             return
         if len(args) < 2:
             print("** instance id missing **")
