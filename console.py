@@ -18,7 +18,17 @@ class HBNBCommand(cmd.Cmd):
     classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
                "City": City, "Amenity": Amenity, "State": State,
                "Review": Review}
-    command = ['create', 'show', 'update', 'all', 'destroy', 'count']
+    com = ['create', 'show', 'update', 'all', 'destroy', 'count']
+
+    def do_count(self, class_name):
+        """counts number of objects of a class"""
+        count = 0
+        all_objs = storage.all()
+        for key, value in all_objs.items():
+            list_cls = key.split(".")
+            if list_cls[0] == class_name:
+                count += 1
+        print(count)
 
     def do_quit(self, arg):
         """Exit the interpreter."""
@@ -147,6 +157,16 @@ class HBNBCommand(cmd.Cmd):
                         storage.save()
                     return
             print("** no instance found **")
+
+    def precmd(self, arg):
+        """parses command input"""
+        if '.' in arg and '(' in arg and ')' in arg:
+            l_cls = arg.split('.')
+            cnd = list_cls[1].split('(')
+            args = cnd[1].split(')')
+            if l_cls[0] in HBNBCommand.classes and cnd[0] in HBNBCommand.com:
+                arg = cnd[0] + ' ' + l_cls[0] + ' ' + args[0]
+        return arg
 
 
 if __name__ == "__main__":

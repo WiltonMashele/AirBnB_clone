@@ -27,7 +27,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual('BaseModel', my_model_json['__class__'])
         self.assertEqual(my_model.id, my_model_json['id'])
 
-
     def test_save(self):
         """Testing updated_at after making
         changes to the instance
